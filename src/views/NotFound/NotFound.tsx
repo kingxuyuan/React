@@ -8,7 +8,6 @@ interface NotFoundProps {
 
 const NotFound: FC<NotFoundProps> = (props) => {
     const history = useHistory();
-
     const backHome = () => {
         history.replace('/');
     }

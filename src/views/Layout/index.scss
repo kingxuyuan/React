@@ -1,10 +1,5 @@
 .layout {
     display: flex;
-    .layout-siderbar {
-        width: 210px;
-        min-height: 100vh;
-        background-color: #272727;
-    }
     .layout-section {
         flex: 1;
         min-height: 100vh;

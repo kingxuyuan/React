@@ -1,30 +1,39 @@
-import { FC, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { Switch, RouteComponentProps, useHistory } from 'react-router-dom';
 import './index.scss';
 
-interface LayoutProps {
+import router, { RouteTypes } from '../../router/router';
+import renderRoutes from '../../router/renderRoutes';
+import Siderbar from '../../components/Siderbar/Siderbar';
 
+interface LayoutProps extends RouteComponentProps { }
+
+const flatFn = (arr: RouteTypes[]): string[] => {
+    return arr.map((item: RouteTypes) => {
+        if (item.children) {
+            return flatFn(item.children);
+        }
+        return item.path
+    }).flat()
 }
 
-const Home = lazy(() => import('../../views/Home/Home'));
-const Person = lazy(() => import('../../views/Mine/Person'));
-
 const Layout: FC<LayoutProps> = (props) => {
-   
+    const history = useHistory();
+    const is404 = flatFn(router).some(item => item === props.location.pathname);
+
+    useEffect(() => {
+        !is404 && history.replace('/404')
+    }, [])
+
     return (
         <div className="layout">
-            <div className="layout-siderbar">
-                <h2>菜单</h2>
-            </div>
+            <Siderbar {...props} />
             <div className="layout-section">
                 <div className="layout-header">
                     <h2>头部</h2>
                 </div>
                 <div className="layout-main">
-                    <Switch>
-                        <Route path="/home" component={Home} />
-                        <Route path="/person" component={Person} />
-                    </Switch>
+                    <Switch>{renderRoutes(router, '55')}</Switch>
                 </div>
             </div>
         </div>
