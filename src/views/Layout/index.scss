@@ -1,7 +1,30 @@
 .layout {
-    display: flex;
+    .layout-slider {
+        width: 210px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include flexColumn();
+        background-color: #001529;
+        &-top {
+            padding: 20px 0;
+            @include flexCenter();
+            img {
+                width: 30px;
+            }
+            h1 {
+                color: #fff;    
+                font-size: 18px;
+                font-weight: 600;
+                margin-left: 6px;
+                margin-bottom: 0;
+            }
+        }
+    }
     .layout-section {
         flex: 1;
+        margin-left: 210px;
         min-height: 100vh;
     }
 }

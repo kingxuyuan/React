@@ -1,5 +1,10 @@
-.layout-siderbar {
+.sider-menu {
+    flex: 1;
     width: 210px;
-    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background-color: #001529;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
 }

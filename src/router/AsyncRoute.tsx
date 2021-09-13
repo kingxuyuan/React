@@ -1,15 +1,27 @@
 import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+import { getToken } from '../store/actions/token';
 import { RouteTypes } from './router';
 
-interface AsyncRouteProps extends RouteTypes { }
+nprogress.configure({ showSpinner: false });
+
+interface AsyncRouteProps extends RouteTypes { };
 
 const AsyncRoute: FC<AsyncRouteProps> = (props) => {
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        
-        // !flag && window.location.replace('/404');
+        nprogress.done();
+        return () => {
+            dispatch(getToken());
+            nprogress.start();
+        }
     }, []);
-    
+
     return (
         <Route {...props} />
     );

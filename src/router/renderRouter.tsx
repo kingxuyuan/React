@@ -1,12 +1,16 @@
 import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { RouteTypes } from './router';
 import AsyncRoute from './AsyncRoute';
+import { getToken } from '../store/selectors/token';
 
-const renderRouter = (arr: RouteTypes[], auth: string, requireAuth = '/login'): any => {
+const RenderRouter = (arr: RouteTypes[], requireAuth = '/login'): any => {
+    const auth = useSelector(getToken);
+
     return arr ? arr.map((item: RouteTypes, idx: number) => {
         const Component: any = item.component;
         if (item.children) {
-            return renderRouter(item.children, auth);
+            return RenderRouter(item.children, auth);
         }
         return <AsyncRoute
             key={item.key || idx}
@@ -22,4 +26,4 @@ const renderRouter = (arr: RouteTypes[], auth: string, requireAuth = '/login'): 
     }) : null
 }
 
-export default renderRouter;
+export default RenderRouter;

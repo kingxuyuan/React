@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import { RouteConfig } from 'react-router-config';
 import { HomeOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons';
 
@@ -7,6 +8,10 @@ import Monitor from '../views/Dashboard/Monitor';
 import Workbench from '../views/Dashboard/Workbench';
 import Person from '../views/Mine/Person';
 import Setting from '../views/Mine/Setting';
+import Layout from '../views/Layout/Layout';
+import Login from '../views/Login/Login';
+import NotFound from '../views/NotFound/NotFound';
+
 
 export interface RouteTypes extends RouteConfig {
     path: string,
@@ -16,7 +21,24 @@ export interface RouteTypes extends RouteConfig {
     icon?: any
 }
 
-const router: RouteTypes[] = [
+export const whiteList: RouteTypes[] = [
+    {
+        path: '/',
+        exact: true,
+        component: () => <Redirect to="/layout/home" />
+    }, {
+        path: '/layout',
+        component: Layout
+    }, {
+        path: '/login',
+        component: Login
+    }, {
+        path: '*',
+        component: NotFound
+    },
+]
+
+export const mainRouter: RouteTypes[] = [
     {
         title: '首页',
         path: '/layout/home',
@@ -70,5 +92,3 @@ const router: RouteTypes[] = [
         ]
     }
 ]
-
-export default router;

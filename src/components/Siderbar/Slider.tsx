@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import router, { RouteTypes } from '../../router/router';
+import { mainRouter, RouteTypes } from '../../router/router';
 
 import './index.scss';
 
@@ -28,7 +28,7 @@ const renderMenu = (arr: RouteTypes[]) => {
 }
 
 const Siderbar: FC<SiderbarProps> = (props) => {
-    const oldOpenKey = router.map(item => item.path).filter(item => props.location.pathname.includes(item))
+    const oldOpenKey = mainRouter.map(item => item.path).filter(item => props.location.pathname.includes(item))
     const [openKey, setOpenKey] = useState(oldOpenKey);
     const [selectedKey, setSelectedKey] = useState([props.location.pathname]);
 
@@ -45,7 +45,7 @@ const Siderbar: FC<SiderbarProps> = (props) => {
     }, [props.location.pathname])
 
     return (
-        <div className="layout-siderbar">
+        <div className="sider-menu">
             <Menu
                 mode="inline"
                 theme="dark"
@@ -56,7 +56,7 @@ const Siderbar: FC<SiderbarProps> = (props) => {
                 onClick={(e: any) => handleClick(e)}
                 onOpenChange={(e: any) => openChange(e)}
             >
-                {renderMenu(router)}
+                {renderMenu(mainRouter)}
             </Menu>
         </div>
     );
