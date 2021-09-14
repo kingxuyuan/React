@@ -23,7 +23,7 @@ const Navbar: FC<NavbarProps> = (props) => {
         <div className="layout-navbar">
             <div className="layout-navbar-left">
                 <div className="unfold" onClick={() => changeFold()}>
-                    <MenuFoldOutlined />
+                    {isFold ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
                 </div>
                 <div className="breadcrumb">
                     <Breadcrumb>
