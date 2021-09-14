@@ -9,8 +9,6 @@ import renderRouter from './router/renderRouter';
 import withReduxProvider from './components/HOC/withReduxProvider';
 
 const MainRoute = () => {
-
-
     return (
         <Router>
             <Suspense fallback={null}>
@@ -26,7 +24,7 @@ const renderComponent: (C: ComponentType) => ComponentType = compose(
     withReduxProvider()
 )
 
-const RootComponent = renderComponent(MainRoute)
+const RootComponent = renderComponent(MainRoute);
 
 const App = () => <RootComponent />;
 

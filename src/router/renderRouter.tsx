@@ -6,7 +6,6 @@ import { getToken } from '../store/selectors/token';
 
 const RenderRouter = (arr: RouteTypes[], requireAuth = '/login'): any => {
     const auth =useSelector(getToken);
-
     return arr ? arr.map((item: RouteTypes, idx: number) => {
         const Component: any = item.component;
         if (item.children) {
@@ -16,8 +15,9 @@ const RenderRouter = (arr: RouteTypes[], requireAuth = '/login'): any => {
             key={item.key || idx}
             path={item.path}
             exact={item.exact}
-            component={(props: any) => {
+            render={(props: any) => {
                 if (!item.require || auth || item.path === requireAuth) {
+                
                     return <Component {...props} />
                 }
                 return <Redirect to={{ pathname: requireAuth, state: { prev: item.location } }} />

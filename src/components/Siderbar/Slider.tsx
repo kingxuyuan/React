@@ -49,9 +49,7 @@ const Siderbar: FC<SiderbarProps> = (props) => {
         setSelectedKey([props.location.pathname]);
     }, [props.location.pathname])
 
-    useEffect(() => {
-        console.log(11111);
-    }, [])
+
     return (
         <div className="sider-menu">
             <Menu

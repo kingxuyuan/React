@@ -1,7 +1,9 @@
 import { FC, memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, RouteComponentProps, useHistory } from 'react-router-dom';
 
 import './index.scss';
+import { getToken } from '../../store/actions/token';
 import { mainRouter, RouteTypes } from '../../router/router';
 import renderRouter from '../../router/renderRouter';
 import Siderbar from '../../components/Siderbar/Slider';
@@ -20,6 +22,7 @@ const flatFn = (arr: RouteTypes[]): any[]=> {
 
 const Layout: FC<LayoutProps> = (props) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const is404 = flatFn(mainRouter).some(item => item === props.location.pathname);
     const [foldWidth, setFoldWidth] = useState(210);
     const [isFold, setIsFold] = useState(false);
@@ -27,7 +30,10 @@ const Layout: FC<LayoutProps> = (props) => {
     useEffect(() => {
         !is404 && history.replace('/404');
     }, [])
- 
+
+    useEffect(() => {
+        dispatch(getToken());
+    })
     
     return (
         <div className="layout">
