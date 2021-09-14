@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Button, message } from 'antd';
 
-import { fetchSetToken, getToken } from '../../store/actions/token';
+import { fetchSetToken } from '../../store/actions/token';
+import { getToken } from '../../store/selectors/token';
 
 interface LoginProps {}
 
@@ -20,8 +21,7 @@ const Login: FC<LoginProps> = (props) => {
     }
 
     useEffect(() => {
-        console.log(token);
-        
+        token && history.replace('/');
     }, [token])
 
     return (

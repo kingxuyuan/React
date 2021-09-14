@@ -17,6 +17,7 @@ const AsyncRoute: FC<AsyncRouteProps> = (props) => {
     useEffect(() => {
         nprogress.done();
         return () => {
+
             dispatch(getToken());
             nprogress.start();
         }

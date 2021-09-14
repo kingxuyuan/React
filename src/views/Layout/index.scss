@@ -7,6 +7,7 @@
         left: 0;
         @include flexColumn();
         background-color: #001529;
+        transition: width .3s cubic-bezier(.645,.045,.355,1);
         &-top {
             padding: 20px 0;
             @include flexCenter();
@@ -19,12 +20,28 @@
                 font-weight: 600;
                 margin-left: 6px;
                 margin-bottom: 0;
+                animation: hide-show .3s;
             }
         }
     }
     .layout-section {
         flex: 1;
-        margin-left: 210px;
         min-height: 100vh;
+        transition: margin-left .3s cubic-bezier(.645,.045,.355,1);
+    }
+}
+
+@keyframes hide-show {
+    0% {
+        opacity: 0;
+        display: none;
+    }
+    80% {
+        opacity: 0;
+        display: none;
+    }
+    100% {
+        opacity: 1;
+        display: unset;
     }
 }

@@ -7,7 +7,10 @@ import './index.scss';
 
 const { SubMenu } = Menu;
 
-interface SiderbarProps extends RouteComponentProps { }
+interface SiderbarProps extends RouteComponentProps {
+    isFold: boolean
+    foldWidth: number
+}
 
 const renderMenu = (arr: RouteTypes[]) => {
     return arr.map((item: RouteTypes) => {
@@ -31,6 +34,7 @@ const Siderbar: FC<SiderbarProps> = (props) => {
     const oldOpenKey = mainRouter.map(item => item.path).filter(item => props.location.pathname.includes(item))
     const [openKey, setOpenKey] = useState(oldOpenKey);
     const [selectedKey, setSelectedKey] = useState([props.location.pathname]);
+    const { isFold, foldWidth } = props;
 
     const openChange = (keys: any) => {
         setOpenKey(keys)
@@ -39,18 +43,22 @@ const Siderbar: FC<SiderbarProps> = (props) => {
         setSelectedKey(e.key)
     }
 
+
     useEffect(() => {
         setOpenKey(oldOpenKey);
         setSelectedKey([props.location.pathname]);
     }, [props.location.pathname])
 
+    useEffect(() => {
+        console.log(11111);
+    }, [])
     return (
         <div className="sider-menu">
             <Menu
                 mode="inline"
                 theme="dark"
-                style={{ width: 210 }}
-                inlineCollapsed={false}
+                style={{ width: foldWidth }}
+                inlineCollapsed={isFold}
                 openKeys={openKey}
                 selectedKeys={selectedKey}
                 onClick={(e: any) => handleClick(e)}

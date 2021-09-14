@@ -5,7 +5,7 @@ import AsyncRoute from './AsyncRoute';
 import { getToken } from '../store/selectors/token';
 
 const RenderRouter = (arr: RouteTypes[], requireAuth = '/login'): any => {
-    const auth = useSelector(getToken);
+    const auth =useSelector(getToken);
 
     return arr ? arr.map((item: RouteTypes, idx: number) => {
         const Component: any = item.component;

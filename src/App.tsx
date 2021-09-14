@@ -10,6 +10,7 @@ import withReduxProvider from './components/HOC/withReduxProvider';
 
 const MainRoute = () => {
 
+
     return (
         <Router>
             <Suspense fallback={null}>
