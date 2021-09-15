@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Button, message } from 'antd';
@@ -6,23 +6,25 @@ import { Button, message } from 'antd';
 import { fetchSetToken } from '../../store/actions/token';
 import { getToken } from '../../store/selectors/token';
 
-interface LoginProps {}
+interface LoginProps { }
 
 const Login: FC<LoginProps> = (props) => {
     const history = useHistory();
     const token = useSelector(getToken);
     const dispatch = useDispatch();
 
-    const loginFn = () => {
+    const loginFn = useCallback(() => {
         dispatch(fetchSetToken('asdwdasdsadsa+=', () => {
             message.success('登陆成功！');
             history.replace('/');
         }))
-    }
+    }, [dispatch, history])
+
+
 
     useEffect(() => {
         token && history.replace('/');
-    }, [token])
+    }, [history, token])
 
     return (
         <div className="login">

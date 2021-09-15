@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState, useRef } from 'react';
 import { Menu } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { mainRouter, RouteTypes } from '../../router/router';
@@ -32,22 +32,23 @@ const renderMenu = (arr: RouteTypes[]) => {
 
 const Siderbar: FC<SiderbarProps> = (props) => {
     const oldOpenKey = mainRouter.map(item => item.path).filter(item => props.location.pathname.includes(item))
+    const ref = useRef(oldOpenKey)
     const [openKey, setOpenKey] = useState(oldOpenKey);
     const [selectedKey, setSelectedKey] = useState([props.location.pathname]);
     const { isFold, foldWidth } = props;
 
-    const openChange = (keys: any) => {
+    const openChange = (keys: any[]) => {
         setOpenKey(keys)
     }
     const handleClick = (e: any) => {
         setSelectedKey(e.key)
     }
 
-
     useEffect(() => {
-        setOpenKey(oldOpenKey);
+        setOpenKey(isFold ? [] : ref.current);
         setSelectedKey([props.location.pathname]);
-    }, [props.location.pathname])
+    }, [isFold, props.location.pathname])
+
 
 
     return (

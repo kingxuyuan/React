@@ -29,7 +29,7 @@ const Layout: FC<LayoutProps> = (props) => {
     
     useEffect(() => {
         !is404 && history.replace('/404');
-    }, [])
+    }, [history, is404])
 
     useEffect(() => {
         dispatch(getToken());
