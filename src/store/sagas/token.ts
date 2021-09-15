@@ -1,16 +1,23 @@
-import { put, call, takeEvery } from 'redux-saga/effects';
-import { TOKEN } from '../actionTypes/token';
-import { setToken } from '../actions/token';
-import { FETCH_TOKEN_TYPES } from '../types/token';
-import token from '../../utils/token';
+import { call, put, takeEvery } from "redux-saga/effects";
 
-function* fetchToken(params: FETCH_TOKEN_TYPES) {
-    yield call(token.setToken, params.payload);
-    yield put(setToken(params.payload));
-    params.callback();
+import { setToken, clearToken } from "../actions/token";
+import { FetchSetToken, FetchClearToken } from "../types/token";
+import { TOKENSTYPES } from "../actionsTypes/token";
+
+import token from "../../tools/token";
+
+function* setTokenSaga({ payload, cb }: FetchSetToken) {
+    yield call(token.setToken, payload.token);
+    yield put(setToken({ token: payload.token }));
+    cb && cb();
+}
+function* clearTokenSaga({ cb }: FetchClearToken) {
+    yield call(token.clear);
+    yield put(clearToken());
+    cb && cb();
 }
 
-function* tokenSaga() {
-    yield takeEvery(TOKEN.FETCH_TOKEN, fetchToken)
+export default function* tokenSaga() {
+    yield takeEvery(TOKENSTYPES.FETCH_SET_TOKEN, setTokenSaga);
+    yield takeEvery(TOKENSTYPES.FETCH_CLEAR_TOKEN, clearTokenSaga);
 }
-export default tokenSaga;

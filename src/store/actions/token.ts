@@ -1,21 +1,28 @@
-import { TOKEN } from '../actionTypes/token';
-import { SET_TOKEN_TYPES, WATCH_TOKEN_TYPES, CLEARN_TOKEN_TYPES, FETCH_TOKEN_TYPES } from '../types/token';
+import { TOKENSTYPES } from "../actionsTypes/token";
 
-export const setToken = (data: string): SET_TOKEN_TYPES => ({
-    type: TOKEN.SET_TOKEN,
-    payload: data
-})
+import { TokenTypes, SetToken, ClearToken, FetchSetToken, FetchClearToken ,WatchToken} from "../types/token";
 
-export const getToken = (): WATCH_TOKEN_TYPES => ({
-    type: TOKEN.WATCH_TOKEN,
-})
+export const setToken = (data: TokenTypes): SetToken => ({
+    type: TOKENSTYPES.SET_TOKEN,
+    payload: data,
+});
 
-export const clearnToken = (callback: () => void): CLEARN_TOKEN_TYPES => ({
-    callback
-})
+export const clearToken = (): ClearToken => ({
+    type: TOKENSTYPES.CLEAR_TOKEN,
+});
 
-export const fetchSetToken = (data: string, callback: () => void): FETCH_TOKEN_TYPES => ({
-    type: TOKEN.FETCH_TOKEN,
-    callback,
-    payload: data
-})
+
+export const watchToken = (): WatchToken => ({
+    type: TOKENSTYPES.WATCH_CLEAR_TOKEN,
+});
+
+export const fetchSetToken = (data: any, cb: () => void): FetchSetToken => ({
+    type: TOKENSTYPES.FETCH_SET_TOKEN,
+    payload: data,
+    cb,
+});
+
+export const fetchClearToken = (cb: () => void): FetchClearToken => ({
+    type: TOKENSTYPES.FETCH_CLEAR_TOKEN,
+    cb,
+});

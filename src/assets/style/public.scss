@@ -1,26 +1,20 @@
-@mixin  flexCenter {
+@mixin flexCenter {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-@mixin flexColumn {
+@mixin flexItemCenter {
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
 
-@mixin nameItemsCenterSpaceBetween {
+@mixin flexCenterBetween {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-@mixin flexA {
+@mixin flexColumn {
     display: flex;
-    align-items: center;
-}
-
-@mixin flexItemsCenter {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
 }

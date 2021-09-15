@@ -1,17 +1,32 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-interface HomeProps {}
+import { sendConfigRequest } from '../../store/actions/config';
+import { getConfig } from '../../store/selectors/config';
+import { FetchFailTypes } from '../../store/types/config';
+
+interface HomeProps { }
 
 const Home: FC<HomeProps> = (props) => {
+    const dispatch = useDispatch();
+    const config: FetchFailTypes = useSelector(getConfig);
+
+    useEffect(() => {
+        dispatch(sendConfigRequest());
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(config.data);
+    // }, [config])
     return (
         <div className="home">
-            首页
-            <div><Link to="/layout/mine/person">去个人中心</Link></div>
-            <div><Link to="/404">去404</Link></div>
-            <div><Link to="/login">去登录</Link></div>
+            {config.status === 'padding' ? <h1>加载中...</h1> : <div>{
+                config?.data?.map((item: any) => (
+                    <h1 key={item.user_id}>{item.user_name}：工资 {item.user_salary}</h1>
+                ))
+            }</div>}
         </div>
     );
-}
+};
 
 export default Home;

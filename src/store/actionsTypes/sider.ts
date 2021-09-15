@@ -1,0 +1,3 @@
+export enum SILDEBAR {
+    SIDEBARFOLD = "SIDEBARFOLD",
+}

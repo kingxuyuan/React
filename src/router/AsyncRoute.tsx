@@ -1,26 +1,29 @@
-import { FC, useEffect } from 'react';
-import { Route, useHistory } from 'react-router-dom';
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
+import { useEffect, useContext } from "react";
+import { Route } from "react-router-dom";
+import { RouterConfig } from "./router";
+import { RouteContext } from "../App";
 
-import { RouteTypes } from './router';
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
-nprogress.configure({ showSpinner: false });
+NProgress.configure({ showSpinner: false });
 
-interface AsyncRouteProps extends RouteTypes { };
+interface Props extends RouterConfig { }
 
-const AsyncRoute: FC<AsyncRouteProps> = (props) => {
-    const history = useHistory()
+const AsyncRoute = (props: Props) => {
+    
+    const { changeRroute } = useContext(RouteContext);
     useEffect(() => {
-        nprogress.done();
+      console.log(2222);
+      
+        NProgress.done();
+        changeRroute();
         return () => {
-            nprogress.start();
-        }
-    }, [history.location.pathname]);
+            NProgress.start();
+        };
+    }, []);
 
-    return (
-        <Route {...props} />
-    );
-}
+    return <Route {...props} />;
+};
 
 export default AsyncRoute;

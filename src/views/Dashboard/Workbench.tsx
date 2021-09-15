@@ -1,8 +1,6 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-interface WorkbenchProps {
-
-}
+interface WorkbenchProps {}
 
 const Workbench: FC<WorkbenchProps> = (props) => {
     return (
@@ -10,6 +8,6 @@ const Workbench: FC<WorkbenchProps> = (props) => {
             <h1>工作台</h1>
         </div>
     );
-}
+};
 
 export default Workbench;

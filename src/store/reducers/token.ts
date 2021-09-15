@@ -1,27 +1,29 @@
-import token from '../../utils/token';
-import { TOKEN } from '../actionTypes/token';
+import { Actions } from "../types/token";
+import { TOKENSTYPES } from "../actionsTypes/token";
+import token from "../../tools/token"
 
 const initToken = {
-    token: token.getToken()
+    token: token.getterToken(),
 };
 
-const tokenReducer = (state = initToken, action: any) => {
+const tokenReducer = (state = initToken, action: Actions) => {
     switch (action.type) {
-        case TOKEN.SET_TOKEN:
+        case TOKENSTYPES.SET_TOKEN:
             return {
-                token: action?.payload
+                token: action.payload.token,
             };
-        case TOKEN.WATCH_TOKEN:
+        case TOKENSTYPES.CLEAR_TOKEN:
             return {
-                token: token.getToken()
+                token: "",
             };
-        case TOKEN.CLEARN_TOKEN:
+        case TOKENSTYPES.WATCH_CLEAR_TOKEN:
+
             return {
-                token: ''
+                token: token.getterToken()
             };
         default:
-            return state;
+            return state
     }
-}
+};
 
 export default tokenReducer;

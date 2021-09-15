@@ -1,15 +1,19 @@
-import { FC } from 'react';
+import { FC, useEffect } from "react";
 
-interface MonitorProps {
-
-}
+interface MonitorProps {}
 
 const Monitor: FC<MonitorProps> = (props) => {
+    useEffect(() => {
+        const promise = new Promise((resolve, reject) => {
+            reject();
+        });
+        promise.then();
+    }, []);
     return (
         <div className="monitor">
-            <h1>控制页</h1>
+            <h1>监控页</h1>
         </div>
     );
-}
+};
 
 export default Monitor;

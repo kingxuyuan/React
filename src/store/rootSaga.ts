@@ -1,9 +1,13 @@
-import { all, fork } from 'redux-saga/effects';
+import { all, fork } from "redux-saga/effects";
 
-import tokenSaga from './sagas/token';
+import loginSaga from "./sagas/token";
+import configSage from './sagas/config';
 
-export default function* rootSaga () {
+const rootSaga = function* () {
     yield all([
-        fork(tokenSaga)
-    ])
-}
+        fork(loginSaga),
+        fork(configSage)
+    ]);
+};
+
+export default rootSaga;

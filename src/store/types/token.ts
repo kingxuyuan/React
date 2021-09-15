@@ -1,20 +1,30 @@
-import { TOKEN } from '../actionTypes/token';
+import { TOKENSTYPES } from "../actionsTypes/token";
 
-export interface FETCH_TOKEN_TYPES {
-    payload: string
-    callback: () => void
-    type: TOKEN.FETCH_TOKEN
+export interface TokenTypes {
+    token: string;
 }
 
-export interface SET_TOKEN_TYPES {
-    payload: string
-    type: TOKEN.SET_TOKEN
+export interface SetToken {
+    type: TOKENSTYPES.SET_TOKEN;
+    payload: TokenTypes;
 }
 
-export interface WATCH_TOKEN_TYPES {
-    type: TOKEN.WATCH_TOKEN
+export interface ClearToken {
+    type: TOKENSTYPES.CLEAR_TOKEN;
 }
 
-export interface CLEARN_TOKEN_TYPES {
-    callback: () => void
+export interface WatchToken {
+    type: TOKENSTYPES.WATCH_CLEAR_TOKEN;
+}
+export type Actions = SetToken | ClearToken | WatchToken;
+
+export interface FetchSetToken {
+    type: TOKENSTYPES.FETCH_SET_TOKEN;
+    payload: any;
+    cb: () => void;
+}
+
+export interface FetchClearToken {
+    type: TOKENSTYPES.FETCH_CLEAR_TOKEN;
+    cb: () => void;
 }

@@ -1,26 +1,30 @@
-import { FC } from 'react';
-import { Result, Button } from 'antd';
-import { useHistory } from 'react-router';
+import { FC } from "react";
+import { useHistory } from "react-router-dom";
+import { Result, Button } from "antd";
 
-interface NotFoundProps {
+interface NotFoundProps {}
 
-}
-
-const NotFound: FC<NotFoundProps> = (props) => {
+const NotFound: FC<NotFoundProps> = () => {
     const history = useHistory();
+
     const backHome = () => {
-        history.replace('/');
-    }
+        history.push("/app/home");
+    };
     return (
         <div className="notfound">
             <Result
                 status="404"
                 title="404"
-                subTitle="Sorry, the page you visited does not exist."
-                extra={<Button type="primary" onClick={() => backHome()}>Back Home</Button>}
-            />,
+                subTitle="404 ... 找不到您访问的页面"
+                extra={
+                    <Button type="primary" onClick={() => backHome()}>
+                        返回首页
+                    </Button>
+                }
+            />
+            ,
         </div>
     );
-}
+};
 
 export default NotFound;

@@ -1,15 +1,19 @@
-import { ComponentType } from 'react';
-import { Provider } from 'react-redux';
-import store from '../../store/index';
+import { ComponentType } from "react";
+import { Provider } from "react-redux";
+import { AnyAction, Store } from "redux";
 
-export default function withReduxProvider(): any {
-    return (PackageComponents: ComponentType) => {
-        const NewComponent: ComponentType = (props) => (
+function WithReduxProvider<Props, Action = AnyAction>(store: Store<Action>) {
+    return (WapperedComponent: ComponentType<Props>) => {
+        const Component: ComponentType<Props> = (props) => (
             <Provider store={store}>
-                <PackageComponents {...props} />
+                <WapperedComponent {...props} />
             </Provider>
-        )
-        NewComponent.displayName = `withReduxProvider(${PackageComponents.displayName || PackageComponents.name})`;
-        return NewComponent;
+        );
+
+        Component.displayName = `withReduxProvider(${WapperedComponent.displayName || WapperedComponent.name})`;
+
+        return Component;
     };
 }
+
+export default WithReduxProvider;

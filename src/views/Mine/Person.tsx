@@ -1,18 +1,32 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { FC } from "react";
+import { Button, message } from "antd";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 
-interface PersonProps {
+import { fetchClearToken } from "../../store/actions/token";
 
-}
+interface PersonProps {}
 
 const Person: FC<PersonProps> = (props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const logout = () => {
+        dispatch(
+            fetchClearToken(() => {
+                message.success("成功退出！！！");
+                history.replace("/login");
+            }),
+        );
+    };
     return (
         <div className="person">
             <h1>个人中心</h1>
-            <Link to="/">返回首页</Link>
-            <div><Link to="/layout/mine/setting">个人设置</Link></div>
+            <Button type="primary" onClick={() => logout()}>
+                退出登录
+            </Button>
         </div>
     );
-}
+};
 
 export default Person;
